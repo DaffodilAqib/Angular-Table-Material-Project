@@ -1,0 +1,41 @@
+.container{
+    padding-top: 40px;
+}
+.background{
+    background-image: url("../../assets/images/html-color-codes-color-tutorials-hero.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+}
+label {
+    font-size: 29px;
+}
+input[type=text] {
+    width: 80%;
+    padding: 15px 20px;
+    margin: 8px 0;
+    border-radius: 30px;
+    box-sizing: border-box;
+    margin-bottom: 22px;
+  }
+  input[type=Password] {
+    width: 80%;
+    padding: 15px 20px;
+    margin: 8px 0;
+    border-radius: 30px;
+    box-sizing: border-box;
+    margin-bottom: 22px;
+  }
+.login_icon{
+    margin-bottom: 10px;
+}
+.submit_btn{
+    border-radius: 26px;
+    width: 139px;
+    padding: 13px;
+}
+.main_col{
+    border-radius: 20px;
+    padding: 28px;
+    text-align: center;
+    border: 1px solid lightblue;
+}

@@ -1,0 +1,112 @@
+<div class="example-container " [class.example-is-mobile]="mobileQuery.matches" *ngIf="shouldRun">
+    <mat-toolbar color="primary" class="example-toolbar">
+      <button mat-icon-button (click)="snav.toggle()"><mat-icon>menu</mat-icon></button>
+      <h1 class="example-app-name">Table Project</h1>
+      <div class="container">
+        <div class="row justify-content-end">
+            <div class="col-md-4">
+                <input class="search_bar" type="text">&nbsp;
+                <mat-icon svgIcon="search_bar"></mat-icon>
+                &nbsp;
+                <mat-icon svgIcon="github_bar"></mat-icon>
+                &nbsp;
+                <mat-icon svgIcon="google_bar"></mat-icon>
+            </div>
+        </div>       
+      </div>
+      
+    </mat-toolbar>
+  
+    <mat-sidenav-container class="example-sidenav-container"
+                           [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
+      <mat-sidenav style="background-color: #3f51b5;" #snav [mode]="mobileQuery.matches ? 'over' : 'side'"
+                   [fixedInViewport]="mobileQuery.matches" fixedTopGap="56">
+        <mat-nav-list>
+          <a mat-list-item routerLink="">
+            <div class="row align-items-center side_nav_item bg-light">
+                <div class="col-md-3">
+                    <mat-icon svgIcon="home"></mat-icon>
+                </div>
+                &nbsp;
+                <div class="col-md-8">
+                    Home
+                </div>
+                
+            </div>
+            </a>
+
+            <a mat-list-item routerLink=".">
+                <div class="row align-items-center side_nav_item bg-light">
+                    <div class="col-md-3">
+                        <mat-icon svgIcon="dashboard"></mat-icon>
+                    </div>
+                    &nbsp;
+                    <div class="col-md-8">
+                        DashBoard
+                    </div>
+                </div>
+                </a>
+
+                <a mat-list-item routerLink=".">
+                    <div class="row align-items-center side_nav_item bg-light">
+                        <div class="col-md-3">
+                            <mat-icon svgIcon="order"></mat-icon>
+                        </div>
+                        &nbsp;
+                        <div class="col-md-8">
+                            Order
+                        </div>
+                        
+                    </div>
+                    </a>
+
+                    <a mat-list-item routerLink=".">
+                        <div class="row align-items-center side_nav_item bg-light">
+                            <div class="col-md-3">
+                                <mat-icon svgIcon="about"></mat-icon>
+                            </div>
+                            &nbsp;
+                            <div class="col-md-8">
+                                About
+                            </div>
+                            
+                        </div>
+                        </a>
+
+                        <a mat-list-item routerLink=".">
+                            <div class="row align-items-center side_nav_item bg-light">
+                                <div class="col-md-3">
+                                    <mat-icon svgIcon="logout"></mat-icon>
+                                </div>
+                                &nbsp;
+                                <div class="col-md-8">
+                                    Log Out
+                                </div>
+                                
+                            </div>
+                            </a>
+
+        </mat-nav-list>
+      </mat-sidenav>
+  
+      <mat-sidenav-content>
+        <div class="container mt-5">
+            <div class="row justify-content-around">
+              <div class="col-md-3 py-5 bg-light" (click)="seeTable(1)" style="border: 2px solid lightblue; text-align: center;  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+                <h2>
+                  Simple Table
+                </h2>
+              </div>
+              <div class="col-md-3 py-5 bg-light" (click)="seeTable(2)" style="border: 2px solid lightblue; text-align: center;  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+                <h2>
+                  Fetching Data from Json server
+                </h2>
+              </div>
+            </div>
+          </div>
+          <app-simpletable *ngIf="see"></app-simpletable>
+          <app-json-fetch-table *ngIf="!see"></app-json-fetch-table>
+      </mat-sidenav-content>
+    </mat-sidenav-container>
+  </div>
+  
