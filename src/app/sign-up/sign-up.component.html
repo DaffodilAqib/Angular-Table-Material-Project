@@ -1,0 +1,77 @@
+<div class="login_icon">
+  <img src="../../assets/images/icons8-login-64 (1).png" alt="" width="100" height="100">
+</div>
+<div class="alert alert-danger m-auto" *ngIf="error">
+  {{error}}
+</div>
+<form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+    <label for="email">Email</label>
+    <br>
+    <input type="email" id="email" name="email" formControlName="email" required>
+    
+    <div *ngIf="signupForm.controls['email'].invalid && (signupForm.controls['email'].dirty || signupForm.controls['email'].touched)"
+      class="alert alert-danger m-auto">
+
+      <div *ngIf="signupForm.controls['email'].errors?.['required']">
+        *Email is required.
+      </div>
+    </div>
+    <br>
+    <label for="password">Password</label>
+    <br>
+    <input type="password" id="password" name="password" formControlName="password" required>
+    <div *ngIf="signupForm.controls['password'].invalid && (signupForm.controls['password'].touched)"
+      class="alert alert-danger m-auto">
+
+      <div *ngIf="signupForm.controls['password'].errors?.['required']">
+        *Password is required.
+      </div>
+    </div>
+    <br>
+    <div formGroupName="Address">
+      <h1 style="margin-top:6px; text-align: left; margin-bottom: -5px;">Address: </h1>
+      <label for="Street">Street</label>
+      <br>
+      <input type="text" id="Street" name="Street" formControlName="Street" required>
+      <div *ngIf="signupForm.get('Address.Street')?.invalid && (signupForm.get('Address.Street')?.dirty || signupForm.get('Address.Street')?.touched)"
+      class="alert alert-danger m-auto">
+
+      <div *ngIf="signupForm.get('Address.Street')?.errors?.['required']">
+        *Street is required.
+      </div>
+    </div>
+      <br>
+      <label for="City">City</label>
+      <br>
+      <input type="text" id="City" name="City" formControlName="City" required>
+      <div *ngIf="signupForm.get('Address.City')?.invalid && (signupForm.get('Address.City')?.dirty || signupForm.get('Address.City')?.touched)"
+      class="alert alert-danger m-auto">
+
+        <div *ngIf="signupForm.get('Address.City')?.errors?.['required']">
+          *City is required.
+        </div>
+      </div>
+      <br>
+      <label for="State">State</label>
+      <br>
+      <input type="text" id="State" name="State" formControlName="State" required>
+      <div *ngIf="signupForm.get('Address.State')?.invalid && (signupForm.get('Address.State')?.dirty || signupForm.get('Address.State')?.touched)"
+      class="alert alert-danger m-auto">
+
+        <div *ngIf="signupForm.get('Address.State')?.errors?.['required']">
+          *State is required.
+        </div>
+      </div>
+      <br>
+      <label for="Zipcode">Zip Code</label>
+      <br>
+      <input type="text" id="Zipcode" name="Zipcode" formControlName="Zipcode" required>
+      <div *ngIf="signupForm.get('Address.Zipcode')?.invalid && (signupForm.get('Address.Zipcode')?.dirty || signupForm.get('Address.Zipcode')?.touched)"
+      class="alert alert-danger m-auto">
+        <div *ngIf="signupForm.get('Address.Zipcode')?.errors?.['required']">
+          *City is required.
+        </div>
+      </div>
+    </div> 
+    <input type="submit" class="btn btn-primary submit_btn" value="Submit">
+  </form>    

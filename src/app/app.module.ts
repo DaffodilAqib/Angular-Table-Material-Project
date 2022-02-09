@@ -16,6 +16,8 @@ import { MatNativeDateModule } from '@angular/material/core';
 import {MaterialExampleModule} from '../material.module';
 import { LoginComponent } from './login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
+import { AuthGuardGuard } from './auth-guard.guard';
+import { SignUpComponent } from './sign-up/sign-up.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +25,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms'
     SimpletableComponent,
     JsonFetchTableComponent,
     SideNavComponent,
-    LoginComponent
+    LoginComponent,
+    SignUpComponent
   ],
   imports: [
     BrowserModule,
@@ -38,7 +41,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms'
   exports: [
     MatSidenavModule
   ],
-  providers: [],
+  providers: [AuthGuardGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
