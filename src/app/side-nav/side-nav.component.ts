@@ -11,7 +11,9 @@ import { DomSanitizer } from "@angular/platform-browser";
   styleUrls: ['./side-nav.component.css']
 })
 export class SideNavComponent implements OnInit, OnDestroy {
-  see=true;
+  see=0;
+  operation="";
+  currentItem="";
   mobileQuery: MediaQueryList;
   shouldRun=true;
   fillerNav = Array.from({length: 5}, (_, i) => `Nav Item ${i + 1}   `);
@@ -64,12 +66,13 @@ export class SideNavComponent implements OnInit, OnDestroy {
     
   }
   seeTable(num:number){
+    console.log(num)
+    this.see = num;
     if(num==2){
-      this.see=false;
+      this.currentItem = "EmpDetails";
+    }else{
+      this.currentItem = "SalDetails";
     }
-    else{
-      this.see=true;
-    } 
   }
   ngOnInit(): void {
       
@@ -77,5 +80,8 @@ export class SideNavComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.mobileQuery.removeListener(this._mobileQueryListener);
+  }
+  onTab(name:string){
+    this.operation = name;
   }
 }

@@ -35,7 +35,7 @@
             </div>
             </a>
 
-            <a mat-list-item routerLink=".">
+            <a mat-list-item (click)="onTab('Details')">
                 <div class="row align-items-center side_nav_item bg-light">
                     <div class="col-md-3">
                         <mat-icon svgIcon="dashboard"></mat-icon>
@@ -47,7 +47,7 @@
                 </div>
                 </a>
 
-                <a mat-list-item routerLink=".">
+                <a mat-list-item (click)="onTab('orders')">
                     <div class="row align-items-center side_nav_item bg-light">
                         <div class="col-md-3">
                             <mat-icon svgIcon="order"></mat-icon>
@@ -90,22 +90,33 @@
       </mat-sidenav>
   
       <mat-sidenav-content>
-        <div class="container mt-5">
+        <div *ngIf="operation=='Details'">
+          <div  class="container mt-5">
             <div class="row justify-content-around">
               <div class="col-md-3 py-5 bg-light" (click)="seeTable(1)" style="border: 2px solid lightblue; text-align: center;  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
                 <h2>
                   Simple Table
                 </h2>
               </div>
+
               <div class="col-md-3 py-5 bg-light" (click)="seeTable(2)" style="border: 2px solid lightblue; text-align: center;  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+                <h2>
+                  Employee Details
+                </h2>
+              </div>
+
+              <div class="col-md-3 py-5 bg-light" (click)="seeTable(3)" style="border: 2px solid lightblue; text-align: center;  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
                 <h2>
                   Fetching Data from Json server
                 </h2>
               </div>
             </div>
           </div>
-          <app-simpletable *ngIf="see"></app-simpletable>
-          <app-json-fetch-table *ngIf="!see"></app-json-fetch-table>
+          <app-simpletable *ngIf="see==1"></app-simpletable>
+          <app-json-fetch-table *ngIf="see==2" [item]="currentItem"></app-json-fetch-table>
+          <app-json-fetch-table *ngIf="see==3" [item]="currentItem"></app-json-fetch-table>
+        </div>
+        <app-orders *ngIf="operation=='orders'"></app-orders>
       </mat-sidenav-content>
     </mat-sidenav-container>
   </div>

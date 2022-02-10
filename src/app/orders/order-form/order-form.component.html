@@ -1,0 +1,30 @@
+<h1 mat-dialog-title>New Order</h1>
+<div mat-dialog-content>
+    <form [formGroup]="orderForm" (ngSubmit)="onSubmit()">
+        <mat-form-field appearance="fill">
+            <mat-label>Enter your email</mat-label>
+            <input matInput placeholder="pat@example.com" formControlName="email" required />
+            <mat-error *ngIf="orderForm.controls['email'].invalid">{{getErrorMessage()}}</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Enter your password</mat-label>
+            <input matInput [type]="hide ? 'password' : 'text'" formControlName="password">
+            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+              <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Enter FirstName</mat-label>
+            <input matInput formControlName="firstname"  placeholder="Ex. Mohd Aqib">
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Enter LastName</mat-label>
+            <input matInput formControlName="lastname" placeholder="Ex. Khan">
+          </mat-form-field>
+        <input type="submit" value="Submit">
+    </form>
+</div>
+<!-- <div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">No Thanks</button>
+  <button mat-button [mat-dialog-close]="data.animal" cdkFocusInitial>Ok</button>
+</div> -->

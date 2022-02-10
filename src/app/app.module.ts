@@ -18,6 +18,10 @@ import { LoginComponent } from './login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { AuthGuardGuard } from './auth-guard.guard';
 import { SignUpComponent } from './sign-up/sign-up.component';
+import { OrdersComponent } from './orders/orders.component';
+import { EmployeeDetailsComponent } from './employee-details/employee-details.component';
+import { OrderFormComponent } from './orders/order-form/order-form.component';
+
 
 @NgModule({
   declarations: [
@@ -26,7 +30,10 @@ import { SignUpComponent } from './sign-up/sign-up.component';
     JsonFetchTableComponent,
     SideNavComponent,
     LoginComponent,
-    SignUpComponent
+    SignUpComponent,
+    OrdersComponent,
+    EmployeeDetailsComponent,
+    OrderFormComponent
   ],
   imports: [
     BrowserModule,

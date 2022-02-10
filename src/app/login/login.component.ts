@@ -3,7 +3,7 @@ import { Component, ElementRef, OnChanges, OnInit, SimpleChanges, ViewChild } fr
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthServiceService } from '../auth-service.service';
-
+import {environment} from '../../environments/environment';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -17,8 +17,13 @@ export class LoginComponent implements OnInit, OnChanges {
     Password: new FormControl('',[Validators.required])
   })
 
-  // @ViewChild("username") username:ElementRef | undefined;
-  // @ViewChild("password") password:ElementRef | undefined;
+  onSign=true;
+  onSign_in(){
+    this.onSign=true;
+  }
+  onSign_up(){
+    this.onSign=false;
+  }
   constructor(private auth: AuthServiceService, private http: HttpClient, private router:Router) { }
 
   ngOnInit(): void {
@@ -34,7 +39,7 @@ export class LoginComponent implements OnInit, OnChanges {
   }
   onSubmit(){
     console.log(this.loginForm.value);
-    
+    console.log(environment.firebase_Token);
     this.auth.getAuthication({"email":this.loginForm.value.UserName,"password":this.loginForm.value.Password})
     .subscribe((res:any)=>{
       console.log(res.idToken);
