@@ -17,6 +17,6 @@ export class OrderService {
     return this.http.delete(url);
   }
   patchData(url:string,data:any){
-    return this.http.patch("https://firestore.googleapis.com/v1/projects/employee-das/databases/(default)/documents/Order/"+url,data);
+    return this.http.patch(url,data);
   }
 }

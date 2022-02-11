@@ -112,9 +112,9 @@ export class OrdersComponent implements OnInit {
         if(count==1){
           console.log("mess update :-",mess.join('&'));
           console.log("Update value:-",newData);
-          this.orderData.patchData(data.Action+"?"+mess.join('&'),newData)
+          this.orderData.patchData("https://firestore.googleapis.com/v1/"+data.Action+"?"+mess.join('&'),newData)
           .subscribe(res=>{
-            console.log("successfull to update data");
+            console.log("successfull to update data:-",res);
             this.setTableData();
           })
         }
