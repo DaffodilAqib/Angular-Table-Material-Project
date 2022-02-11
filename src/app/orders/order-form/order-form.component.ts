@@ -11,17 +11,18 @@ export class OrderFormComponent implements OnInit {
 
   hide = true;
   orderForm= new FormGroup({
-    email: new FormControl('',[Validators.required]),
-    password: new FormControl('',[Validators.required]),
     firstname: new FormControl('',[Validators.required]),
-    lastname: new FormControl('',[Validators.required])
+    lastname: new FormControl('',[Validators.required]),
+    phonenumber: new FormControl('',[Validators.required]),
+    email: new FormControl('',[Validators.required]),
+    porduct_details: new FormGroup({
+      product_name: new FormControl('',[Validators.required]),
+      prodcut_id: new FormControl('',[Validators.required]),
+      price: new FormControl('',[Validators.required])
+    })
   })
  
-  // porduct_details: new FormGroup({
-  //   product_name: new FormControl('',[Validators.required]),
-  //   prodcut_id: new FormControl('',[Validators.required]),
-  //   price: new FormControl('',[Validators.required])
-  // })
+
 
 
   constructor(public dialogRef: MatDialogRef<OrderFormComponent>) { }
@@ -41,5 +42,8 @@ export class OrderFormComponent implements OnInit {
     }
 
     return this.orderForm.controls['email'].hasError('email') ? 'Not a valid email' : '';
+  }
+  onNoClick(): void {
+    this.dialogRef.close();
   }
 }
