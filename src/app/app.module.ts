@@ -6,9 +6,9 @@ import { AppComponent } from './app.component';
 
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { SimpletableComponent } from './simpletable/simpletable.component';
+
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { JsonFetchTableComponent } from './json-fetch-table/json-fetch-table.component';
+
 import { SideNavComponent } from './side-nav/side-nav.component';
 import {MatSidenavModule} from '@angular/material/sidenav';
 
@@ -18,27 +18,29 @@ import { LoginComponent } from './login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { AuthGuardGuard } from './auth-guard.guard';
 import { SignUpComponent } from './sign-up/sign-up.component';
-import { OrdersComponent } from './orders/orders.component';
-import { EmployeeDetailsComponent } from './employee-details/employee-details.component';
-import { OrderFormComponent } from './orders/order-form/order-form.component';
+
 import { AuthInterceptor } from './auth.Interceptor';
-import { UpdateDailogComponent } from './orders/Update-Delete-Component/update-dailog/update-dailog.component';
-import { DeleteDailogComponent } from './orders/Update-Delete-Component/delete-dailog/delete-dailog.component';
+import { SideNavModule } from './side-nav/side-nav.module';
+
+
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    SimpletableComponent,
-    JsonFetchTableComponent,
+    // SimpletableComponent,
+    // JsonFetchTableComponent,
     SideNavComponent,
     LoginComponent,
     SignUpComponent,
-    OrdersComponent,
-    EmployeeDetailsComponent,
-    OrderFormComponent,
-    UpdateDailogComponent,
-    DeleteDailogComponent
+    // OrdersComponent,
+    // EmployeeDetailsComponent,
+    // OrderFormComponent,
+    // UpdateDailogComponent,
+    // DeleteDailogComponent,
+    // DashboardComponent,
+    // NotPageFoundComponent,
+    // HomePageComponent
   ],
   imports: [
     BrowserModule,
@@ -49,6 +51,7 @@ import { DeleteDailogComponent } from './orders/Update-Delete-Component/delete-d
     BrowserAnimationsModule,
     MatNativeDateModule,
     MaterialExampleModule,
+    SideNavModule,
   ],
   exports: [
     MatSidenavModule

@@ -18,6 +18,9 @@ export class AuthGuardGuard implements CanActivate {
       if(res){
         return true;
       }else{
+        if(this.userAuth.getLocalData()){
+          return true;
+        }
         return this.route.createUrlTree(['']);
       }
     }))

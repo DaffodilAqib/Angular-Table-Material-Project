@@ -9,7 +9,7 @@ import {environment} from '../../environments/environment';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit, OnChanges {
+export class LoginComponent implements OnInit{
 
   error = "";
   loginForm = new FormGroup({
@@ -27,12 +27,9 @@ export class LoginComponent implements OnInit, OnChanges {
   constructor(private auth: AuthServiceService, private http: HttpClient, private router:Router) { }
 
   ngOnInit(): void {
-  }
-  ngOnChanges(changes: SimpleChanges): void {
-      this.error = "";
-      console.log(changes);
-      // console.log(this.username);
-      // console.log(this.password);
+    if(this.auth.getAutoLogin()){
+      this.router.navigate(["home"]);
+    }
   }
   onChanges(){
     this.error="";
@@ -43,8 +40,8 @@ export class LoginComponent implements OnInit, OnChanges {
     this.auth.getAuthication({"email":this.loginForm.value.UserName,"password":this.loginForm.value.Password})
     .subscribe((res:any)=>{
       console.log(res.idToken);
-      this.auth.user.next(res.idToken);
-      this.router.navigate(["/side-nav"]);
+      this.auth.setToLocal(res.idToken);
+      this.router.navigate(["home"]);
       },
       (err)=>{
         console.log(err.error.error);
