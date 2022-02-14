@@ -1,0 +1,44 @@
+<br>
+<div class="container m-auto">
+    <div class="row justify-content-around" >
+        <div class="col-md-4 pt-2 btn btn_order" mat-raised-button (click)="openDialog()">
+            <h2>Add New Order</h2>
+        </div>
+    </div>
+    <div class="row">
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+               
+            <!-- userId Column --> 
+            <div *ngFor="let col of displayedColumn">
+    
+                <ng-container  matColumnDef='{{col}}'>
+                  
+                    <th mat-header-cell *matHeaderCellDef> {{col}}</th>
+                    <td mat-cell *matCellDef="let element"> {{element[col]}} </td>
+                  </ng-container>
+            </div>
+            <!-- Action Column -->
+            <ng-container matColumnDef="Action">
+                <th mat-header-cell *matHeaderCellDef> &nbsp;Action  </th>
+                <td mat-cell *matCellDef="let element">
+                    <a (click)="openDail('Delete',element.Action)">
+                        <button mat-icon-button color="primary" aria-label="Example icon button with a home icon">
+                            <mat-icon>delete</mat-icon>
+                        </button>
+                    </a> | 
+                    <a (click)="openDail('Update',element)">
+                        <button mat-icon-button color="black" aria-label="Example icon button with a home icon">
+                            <mat-icon svgIcon="update"></mat-icon>
+                        </button>
+                    </a>
+                    
+                </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+       </table>
+    </div>
+    
+      
+      
+</div> 

@@ -6,9 +6,9 @@ import { AppComponent } from './app.component';
 
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { SimpletableComponent } from './simpletable/simpletable.component';
-import { HttpClientModule } from '@angular/common/http';
-import { JsonFetchTableComponent } from './json-fetch-table/json-fetch-table.component';
+
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+
 import { SideNavComponent } from './side-nav/side-nav.component';
 import {MatSidenavModule} from '@angular/material/sidenav';
 
@@ -19,14 +19,28 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { AuthGuardGuard } from './auth-guard.guard';
 import { SignUpComponent } from './sign-up/sign-up.component';
 
+import { AuthInterceptor } from './auth.Interceptor';
+import { SideNavModule } from './side-nav/side-nav.module';
+
+
+
+
 @NgModule({
   declarations: [
     AppComponent,
-    SimpletableComponent,
-    JsonFetchTableComponent,
+    // SimpletableComponent,
+    // JsonFetchTableComponent,
     SideNavComponent,
     LoginComponent,
-    SignUpComponent
+    SignUpComponent,
+    // OrdersComponent,
+    // EmployeeDetailsComponent,
+    // OrderFormComponent,
+    // UpdateDailogComponent,
+    // DeleteDailogComponent,
+    // DashboardComponent,
+    // NotPageFoundComponent,
+    // HomePageComponent
   ],
   imports: [
     BrowserModule,
@@ -37,11 +51,16 @@ import { SignUpComponent } from './sign-up/sign-up.component';
     BrowserAnimationsModule,
     MatNativeDateModule,
     MaterialExampleModule,
+    SideNavModule,
   ],
   exports: [
     MatSidenavModule
   ],
-  providers: [AuthGuardGuard],
+  providers: [AuthGuardGuard,{
+    provide: HTTP_INTERCEPTORS,
+    useClass: AuthInterceptor,
+    multi: true,
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

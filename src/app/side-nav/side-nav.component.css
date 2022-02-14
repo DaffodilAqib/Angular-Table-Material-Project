@@ -42,3 +42,11 @@
       
       border-radius: 15px;
   }
+  .image{
+    background-image: url("../../assets/images/banner-g85d3a4bbe_1280.jpg"); /* The image used */
+    background-color: #cccccc; /* Used if the image is unavailable */
+    height: 100%; /* You must set a specified height */
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat; /* Do not repeat the image */
+    background-size: cover; /* Resize the background image to cover the entire container */
+}

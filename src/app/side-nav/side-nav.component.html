@@ -1,112 +1,115 @@
 <div class="example-container " [class.example-is-mobile]="mobileQuery.matches" *ngIf="shouldRun">
-    <mat-toolbar color="primary" class="example-toolbar">
-      <button mat-icon-button (click)="snav.toggle()"><mat-icon>menu</mat-icon></button>
-      <h1 class="example-app-name">Table Project</h1>
-      <div class="container">
-        <div class="row justify-content-end">
-            <div class="col-md-4">
-                <input class="search_bar" type="text">&nbsp;
-                <mat-icon svgIcon="search_bar"></mat-icon>
-                &nbsp;
-                <mat-icon svgIcon="github_bar"></mat-icon>
-                &nbsp;
-                <mat-icon svgIcon="google_bar"></mat-icon>
-            </div>
-        </div>       
+  <mat-toolbar color="primary" class="example-toolbar">
+    <button mat-icon-button (click)="snav.toggle()">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <h1 class="example-app-name">Table Project</h1>
+    <div class="container">
+      <div class="row justify-content-end">
+        <div class="col-md-4">
+          <input class="search_bar" type="text">&nbsp;
+          <mat-icon svgIcon="search_bar"></mat-icon>
+          &nbsp;
+          <mat-icon svgIcon="github_bar"></mat-icon>
+          &nbsp;
+          <mat-icon svgIcon="google_bar"></mat-icon>
+        </div>
       </div>
-      
-    </mat-toolbar>
-  
-    <mat-sidenav-container class="example-sidenav-container"
-                           [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
-      <mat-sidenav style="background-color: #3f51b5;" #snav [mode]="mobileQuery.matches ? 'over' : 'side'"
-                   [fixedInViewport]="mobileQuery.matches" fixedTopGap="56">
-        <mat-nav-list>
-          <a mat-list-item routerLink="">
-            <div class="row align-items-center side_nav_item bg-light">
-                <div class="col-md-3">
-                    <mat-icon svgIcon="home"></mat-icon>
-                </div>
-                &nbsp;
-                <div class="col-md-8">
-                    Home
-                </div>
-                
+    </div>
+
+  </mat-toolbar>
+
+  <mat-sidenav-container class="example-sidenav-container" [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
+    <mat-sidenav style="background-color: #3f51b5;" #snav [mode]="mobileQuery.matches ? 'over' : 'side'"
+      [fixedInViewport]="mobileQuery.matches" fixedTopGap="56">
+      <mat-nav-list>
+        <a mat-list-item routerLink="" [queryParams]="{ value: 'yes' }">
+          <div class="row align-items-center side_nav_item bg-light">
+            <div class="col-md-3">
+              <mat-icon svgIcon="home"></mat-icon>
             </div>
-            </a>
+            &nbsp;
+            <div class="col-md-8 d-none d-md-block">
+              Home
+            </div>
 
-            <a mat-list-item routerLink=".">
-                <div class="row align-items-center side_nav_item bg-light">
-                    <div class="col-md-3">
-                        <mat-icon svgIcon="dashboard"></mat-icon>
-                    </div>
-                    &nbsp;
-                    <div class="col-md-8">
-                        DashBoard
-                    </div>
-                </div>
-                </a>
+          </div>
+        </a>
 
-                <a mat-list-item routerLink=".">
-                    <div class="row align-items-center side_nav_item bg-light">
-                        <div class="col-md-3">
-                            <mat-icon svgIcon="order"></mat-icon>
-                        </div>
-                        &nbsp;
-                        <div class="col-md-8">
-                            Order
-                        </div>
-                        
-                    </div>
-                    </a>
-
-                    <a mat-list-item routerLink=".">
-                        <div class="row align-items-center side_nav_item bg-light">
-                            <div class="col-md-3">
-                                <mat-icon svgIcon="about"></mat-icon>
-                            </div>
-                            &nbsp;
-                            <div class="col-md-8">
-                                About
-                            </div>
-                            
-                        </div>
-                        </a>
-
-                        <a mat-list-item routerLink=".">
-                            <div class="row align-items-center side_nav_item bg-light">
-                                <div class="col-md-3">
-                                    <mat-icon svgIcon="logout"></mat-icon>
-                                </div>
-                                &nbsp;
-                                <div class="col-md-8">
-                                    Log Out
-                                </div>
-                                
-                            </div>
-                            </a>
-
-        </mat-nav-list>
-      </mat-sidenav>
-  
-      <mat-sidenav-content>
-        <div class="container mt-5">
-            <div class="row justify-content-around">
-              <div class="col-md-3 py-5 bg-light" (click)="seeTable(1)" style="border: 2px solid lightblue; text-align: center;  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
-                <h2>
-                  Simple Table
-                </h2>
-              </div>
-              <div class="col-md-3 py-5 bg-light" (click)="seeTable(2)" style="border: 2px solid lightblue; text-align: center;  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
-                <h2>
-                  Fetching Data from Json server
-                </h2>
-              </div>
+        <a mat-list-item routerLink="/DashBoard" [queryParams]="{ value: 'no' }">
+          <div class="row align-items-center side_nav_item bg-light">
+            <div class="col-md-3">
+              <mat-icon svgIcon="dashboard"></mat-icon>
+            </div>
+            &nbsp;
+            <div class="col-md-8 d-none d-md-block">
+              DashBoard
             </div>
           </div>
-          <app-simpletable *ngIf="see"></app-simpletable>
-          <app-json-fetch-table *ngIf="!see"></app-json-fetch-table>
-      </mat-sidenav-content>
-    </mat-sidenav-container>
-  </div>
-  
+        </a>
+
+
+        <!-- (click)="onTab('orders')" -->
+        <!-- [routerLink]="['/home',{outlets: {'home':['orders']}}]" -->
+        <a mat-list-item routerLink="/orders" [queryParams]="{ value: 'no' }">
+          <div class="row align-items-center side_nav_item bg-light">
+            <div class="col-md-3">
+              <mat-icon svgIcon="order"></mat-icon>
+            </div>
+            &nbsp;
+            <div class="col-md-8 d-none d-md-block">
+              Order
+            </div>
+
+          </div>
+        </a>
+
+        <a mat-list-item routerLink="." >
+          <div class="row align-items-center side_nav_item bg-light">
+            <div class="col-md-3">
+              <mat-icon svgIcon="about"></mat-icon>
+            </div>
+            &nbsp;
+            <div class="col-md-8 d-none d-md-block">
+              About
+            </div>
+
+          </div>
+        </a>
+
+        <a mat-list-item (click)="onLoginOut()">
+          <div class="row align-items-center side_nav_item bg-light">
+            <div class="col-md-3">
+              <mat-icon svgIcon="logout"></mat-icon>
+            </div>
+            &nbsp;
+            <div class="col-md-8 d-none d-md-block">
+              Log Out
+            </div>
+
+          </div>
+        </a>
+
+      </mat-nav-list>
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+      <!-- <past here></past> -->
+      <div class="image" *ngIf="val">
+        <div class="container" style="padding-top: 20%;">
+          <div class="row justify-content-around align-content-center">
+            <div class="col-md-8" style="text-align: center;">
+              <h1 style="font-family: 'Oswald';font-size: 67px;">Welcome To Our Website</h1>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="!val">
+        <router-outlet ></router-outlet>
+      </div>
+      
+      <!-- <router-outlet name="home"></router-outlet> -->
+      <!-- <app-orders *ngIf="operation=='orders'"></app-orders> -->
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>

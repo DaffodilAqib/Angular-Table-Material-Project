@@ -1,3 +1,22 @@
+
+.container{
+    padding-top: 40px;
+}
+.main_col{
+    border-radius: 20px;
+    padding: 28px;
+    text-align: center;
+    border: 1px solid lightblue;
+    box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);
+}
+.mini_button{
+    padding: 7px;
+    padding-left: 17px;
+    padding-right: 17px;
+    border-radius: 35px;
+    box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);
+}
+
 *{
     font-family: 'Oswald';
 }

@@ -3,13 +3,13 @@ import { Component, ElementRef, OnChanges, OnInit, SimpleChanges, ViewChild } fr
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthServiceService } from '../auth-service.service';
-
+import {environment} from '../../environments/environment';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit, OnChanges {
+export class LoginComponent implements OnInit{
 
   error = "";
   loginForm = new FormGroup({
@@ -17,29 +17,31 @@ export class LoginComponent implements OnInit, OnChanges {
     Password: new FormControl('',[Validators.required])
   })
 
-  // @ViewChild("username") username:ElementRef | undefined;
-  // @ViewChild("password") password:ElementRef | undefined;
+  onSign=true;
+  onSign_in(){
+    this.onSign=true;
+  }
+  onSign_up(){
+    this.onSign=false;
+  }
   constructor(private auth: AuthServiceService, private http: HttpClient, private router:Router) { }
 
   ngOnInit(): void {
-  }
-  ngOnChanges(changes: SimpleChanges): void {
-      this.error = "";
-      console.log(changes);
-      // console.log(this.username);
-      // console.log(this.password);
+    if(this.auth.getAutoLogin()){
+      this.router.navigate(["home"]);
+    }
   }
   onChanges(){
     this.error="";
   }
   onSubmit(){
     console.log(this.loginForm.value);
-    
+    console.log(environment.firebase_Token);
     this.auth.getAuthication({"email":this.loginForm.value.UserName,"password":this.loginForm.value.Password})
     .subscribe((res:any)=>{
       console.log(res.idToken);
-      this.auth.user.next(res.idToken);
-      this.router.navigate(["/side-nav"]);
+      this.auth.setToLocal(res.idToken);
+      this.router.navigate(["home"]);
       },
       (err)=>{
         console.log(err.error.error);

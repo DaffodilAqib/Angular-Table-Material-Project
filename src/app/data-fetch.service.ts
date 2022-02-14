@@ -7,7 +7,7 @@ import { Injectable } from '@angular/core';
 export class DataFetchService {
 
   constructor(private http:HttpClient) { }
-  getData(){
-    return this.http.get("http://localhost:3000/Employees")
+  getData(url:string){
+    return this.http.get(url)
   }
 }
