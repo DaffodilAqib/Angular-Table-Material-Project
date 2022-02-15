@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from '../dashboard/dashboard.component';
+import { FormBuilderComponent } from '../form-builder/form-builder.component';
 
 import { NotPageFoundComponent } from '../not-page-found/not-page-found.component';
 import { OrdersComponent } from '../orders/orders.component';
@@ -11,6 +12,7 @@ const routes: Routes = [
     path: "", component: SideNavComponent, children: [
       { path: "DashBoard", component: DashboardComponent, pathMatch:"full" },
       { path: "orders", component: OrdersComponent, pathMatch:"full" },
+      {path:"FormBuilder", component:FormBuilderComponent,pathMatch:"full"},
       { path: "**", component: NotPageFoundComponent }
     ]
   }

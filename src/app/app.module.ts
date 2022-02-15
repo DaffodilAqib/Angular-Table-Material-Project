@@ -21,6 +21,8 @@ import { SignUpComponent } from './sign-up/sign-up.component';
 
 import { AuthInterceptor } from './auth.Interceptor';
 import { SideNavModule } from './side-nav/side-nav.module';
+import { FormBuilderComponent } from './form-builder/form-builder.component';
+import { TextFieldCompComponent } from './form-builder/form-Tools/text-field-comp/text-field-comp.component';
 
 
 
@@ -33,6 +35,8 @@ import { SideNavModule } from './side-nav/side-nav.module';
     SideNavComponent,
     LoginComponent,
     SignUpComponent,
+    FormBuilderComponent,
+    TextFieldCompComponent,
     // OrdersComponent,
     // EmployeeDetailsComponent,
     // OrderFormComponent,
