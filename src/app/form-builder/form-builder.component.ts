@@ -1,5 +1,10 @@
 import { CdkDragDrop, copyArrayItem, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { MatIconRegistry } from '@angular/material/icon';
+import { DomSanitizer } from '@angular/platform-browser';
+import { Observable,fromEvent, Subject } from 'rxjs';
+import { FormNameComponent } from './form-name/form-name.component';
 
 @Component({
   selector: 'app-form-builder',
@@ -11,18 +16,98 @@ export class FormBuilderComponent implements OnInit {
   //tools = ["Label","AreaField","Radio button","Check box","Button"];
   tools = [ {name:"TextField",input_type:"text"}, {name:"Label",input_type:"Label"}, {name:"Button",input_type:"button"},{name:"name"},{name:"Address"},{name:"Email"},{name:"Password"}];
   formTools: any = [];
-  model = {};
   hide = true;
-  constructor() { }
+  data: object = [];
+  json_data: any = {}
+  formName = "Enter Form Name";
+  formId="";
+  Observable$ = new Subject();
+  // vis_form_name = true;
+  
+  // @ViewChild('FormName') FormName:ElementRef | any
+
+  constructor(
+    public matIconRegistry: MatIconRegistry,
+    private domSanitizer: DomSanitizer,
+    public dialog: MatDialog
+  ) { }
+
+  changeFormName(){
+    // this.vis_form_name = false;
+    const dialogRef = this.dialog.open(FormNameComponent);
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      if(result){
+        this.formName = result;
+      }
+      
+    });
+  }
 
   ngOnInit(): void {
+    // debugger
+    // let keyups = fromEvent(this.FormName?.nativeElement, "click");
+    // keyups.subscribe(data=>{console.log("Data from input",data)})
+
+    this.matIconRegistry.addSvgIcon(
+      "visibility_off",
+      this.domSanitizer.bypassSecurityTrustResourceUrl("../assets/images/eye-slash-solid.svg")
+    );
+
+    this.matIconRegistry.addSvgIcon(
+      "visibility",
+      this.domSanitizer.bypassSecurityTrustResourceUrl("../assets/images/eye-solid.svg")
+    );
   }
+  // displayName(){
+  //   console.log(this.FormName.nativeElement.value);
+  //   let keyups = fromEvent(this.FormName?.nativeElement, "keyup");
+  //   keyups.subscribe(data=>{console.log("Data from input",data)})
+  // }
+
+  onSubmit(){
+    console.log("model:-",this.data);
+    this.json_data["formName"] = this.formName;
+    this.json_data["id"] = Math.random().toString(36).substr(2, 9); 
+    this.json_data["fields"] = [];
+    for(let i=0;i<this.formTools.length;i++ ){
+      // console.log(this.formTools[i]);
+      if(this.formTools[i].name=="name"){
+        this.json_data.fields.push({"name":"firstName", "label": "First Name", "value": "", "type": "text", "validators":{}});
+        this.json_data.fields.push({"name":"lastName", "label": "Last Name", "value": "", "type": "text", "validators":{}})
+      }
+      else if(this.formTools[i].name=="Address"){
+        this.json_data.fields.push({"name":"street", "label": "Street", "value": "", "type": "text", "validators":{}});
+        this.json_data.fields.push({"name":"city", "label": "City", "value": "", "type": "text", "validators":{}});
+        this.json_data.fields.push({"name":"state", "label": "State", "value": "", "type": "text", "validators":{}});
+        this.json_data.fields.push({"name":"zipcode", "label": "Zipcode", "value": "", "type": "number", "validators":{}});
+      }
+      else if(this.formTools[i].name=="Email"){
+        this.json_data.fields.push({"name":"email", "label": "Email", "value": "", "type": "email", "validators":{}})
+      }
+      else if(this.formTools[i].name=="Password"){
+        this.json_data.fields.push({"name":"password", "label": "Password", "value": "", "type": "password", "validators":{}})
+      }
+
+    }
+    console.log("Final json :-",this.json_data);
+    this.Observable$.next(this.json_data);
+  }
+
+  onDeleteForm(){
+    this.formTools = [];
+    this.formName = "Enter Form Name";
+  }
+
   drop(event: CdkDragDrop<any>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
       console.log(event);
-      const para = document.getElementById("parent");
+      if(this.tools[event.previousIndex].name=="name"){
+       // this.data['name'] = {firstname:"",lastname:""};
+      }
+      // const para = document.getElementById("parent");
       // if(this.tools[event.previousIndex].name=="TextField"){
       //   const element = document.createElement('input');
       //   element.setAttribute("type", "text");
@@ -56,3 +141,4 @@ export class FormBuilderComponent implements OnInit {
     }
   }
 }
+

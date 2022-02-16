@@ -15,119 +15,144 @@
             </div>
         </div>
         <div class="col-md-8">
+          <div class="row justify-content-between">
+            <div class="col-md-4">
+              <!-- Quested to asked -->
+              <!-- <span *ngIf="!vis_form_name" (click)="displayName()">
+                <mat-form-field appearance="fill">
+                  <mat-label>Enter Form Name</mat-label>
+                  <input matInput #FormName>
+                </mat-form-field>
+              </span> -->
+              <button (click)="changeFormName()" style="border: none; height: 52px;">
+                <h1 style="margin-top: 10px;">{{formName}}</h1>
+              </button>  
+            </div>
+            <div class="col-md-3" style=" text-align: center; margin-top: 7px;">
+              <button mat-raised-button color="primary" (click)="onDeleteForm()">New</button>
+            </div>
+          </div>
+          <div class="row">
             <div class="example-container">
-                <h1 style="margin-top: 10px;">Form</h1>
-              
-                <div
-                  cdkDropList
-                  #containerList="cdkDropList"
-                  [cdkDropListData]="formTools"
-                  [cdkDropListConnectedTo]="[toolsList]"
-                  class="example-list"
-                  (cdkDropListDropped)="drop($event)" id="parent" style="min-width: 684px; min-height: 471px;">
-                  <!-- <div class="" style="min-height:471px;" id="parent"></div> -->
-                  <form>
-                    <div *ngFor="let ite of formTools">
-                      <div *ngIf="ite.name=='name'" cdkDrag>
-                        <div class="row justify-content-around">
-                          <h1 style="    margin-left: 116px; margin-top: 10px;">Name :</h1>
-                          <div class="col-md-4">
-                            <mat-form-field appearance="fill">
-                              <mat-label>FirstName</mat-label>
-                              <input matInput placeholder="FirstName">
-                            </mat-form-field>
-                          </div>
-                          <div class="col-md-4">
-                            <mat-form-field appearance="fill">
-                              <mat-label>LastName</mat-label>
-                              <input matInput placeholder="LastName">
-                            </mat-form-field>
-                          </div>
-                        </div>
-                      </div>
-
-                      <!-- for Address -->
-                      
-                        <div *ngIf="ite.name=='Address'" cdkDrag>
-                          <div class="row justify-content-around">
-                            <h1 style="    margin-left: 116px; margin-top: 10px;">Address :</h1>
-                            <div class="col-md-4">
-                              <mat-form-field appearance="fill">
-                                <mat-label>Street</mat-label>
-                                <input matInput placeholder="Street">
-                              </mat-form-field>
-                            </div>
-                            <div class="col-md-4">
-                              <mat-form-field appearance="fill">
-                                <mat-label>City</mat-label>
-                                <input matInput placeholder="City">
-                              </mat-form-field>
-                            </div>
-                          </div>
-                          <div class="row justify-content-around">
-                            <div class="col-md-4">
-                              <mat-form-field appearance="fill">
-                                <mat-label>State</mat-label>
-                                <input matInput placeholder="State">
-                              </mat-form-field>
-                            </div>
-                            <div class="col-md-4">
-                              <mat-form-field appearance="fill">
-                                <mat-label>Zipcode</mat-label>
-                                <input matInput placeholder="Zipcode">
-                              </mat-form-field>
-                            </div>
-                          </div>
-                        </div>
-
-                       <!-- For Email  -->
-                       <div *ngIf="ite.name=='Email'" cdkDrag>
-                        <div class="row justify-content-around">
-                          <h1 style="    margin-left: 116px; margin-top: 10px;">Email :-</h1>
-                          <div class="col-md-4">
-                            <mat-form-field appearance="fill">
-                              <mat-label>Email</mat-label>
-                              <input matInput placeholder="Rpc1234@gmail.com">
-                            </mat-form-field>
-                          </div>
-                        </div>
-                      </div>
-
-                      <!-- For Password  -->
-                      <div *ngIf="ite.name=='Password'" cdkDrag>
-                        <div class="row justify-content-around">
-                          <h1 style="    margin-left: 116px; margin-top: 10px;">Password :-</h1>
-                          <div class="col-md-4">
-                            <mat-form-field appearance="fill">
-                                <mat-label>Enter your password</mat-label>
-                                <input matInput [type]="hide ? 'password' : 'text'">
-                                <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-                                  <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-                                </button>
-                            </mat-form-field>
-                          </div>
-                        </div>
-                      </div>
-
-
-                      <span *ngIf="ite.name=='Label'" cdkDrag>
-                          <label>Label</label>
-                      </span>
-                      <mat-form-field *ngIf="ite.name=='TextField'" appearance="fill" cdkDrag>
-                        <input matInput type="text" placeholder="TextField" >
-                      </mat-form-field>
-                      <!-- <input *ngIf="ite.name=='Button'" type="button" mat-raised-button color="primary" value="Button"> -->
+              <div
+                cdkDropList
+                #containerList="cdkDropList"
+                [cdkDropListData]="formTools"
+                [cdkDropListConnectedTo]="[toolsList]"
+                class="example-list"
+                (cdkDropListDropped)="drop($event)" id="parent" style="min-width: 684px; min-height: 471px;">
+                <!-- <div class="" style="min-height:471px;" id="parent"></div> -->
+                <form autocomplete="off">
+                  <div *ngFor="let ite of formTools">
+                    <div *ngIf="ite.name=='name'" cdkDrag>
                       <div class="row justify-content-around">
-                        <div class="col-md-4" style="text-align: center;">
-                          <button *ngIf="ite.name=='Button'" mat-raised-button color="primary">Submit</button>
+                        <h1 style="    margin-left: 116px; margin-top: 10px;">Name :</h1>
+                        <div class="col-md-4">
+                          <mat-form-field appearance="fill">
+                            <mat-label>FirstName</mat-label>
+                            <input matInput id="firstname" name="firstname"  placeholder="FirstName">
+                          </mat-form-field>
+                        </div>
+                        <div class="col-md-4">
+                          <mat-form-field appearance="fill">
+                            <mat-label>LastName</mat-label>
+                            <input matInput id="lastname" name="lastname"  placeholder="LastName">
+                          </mat-form-field>
                         </div>
                       </div>
-                      
-                      
-                  </div>
-                  </form>
+                    </div>
+
+                    <!-- for Address -->
+                    
+                      <div *ngIf="ite.name=='Address'" cdkDrag>
+                        <div class="row justify-content-around">
+                          <h1 style="    margin-left: 116px; margin-top: 10px;">Address :</h1>
+                          <div class="col-md-4">
+                            <mat-form-field appearance="fill">
+                              <mat-label>Street</mat-label>
+                              <input matInput id="street" name="street"  placeholder="Street">
+                            </mat-form-field>
+                          </div>
+                          <div class="col-md-4">
+                            <mat-form-field appearance="fill">
+                              <mat-label>City</mat-label>
+                              <input matInput id="city" name="city"  placeholder="City">
+                            </mat-form-field>
+                          </div>
+                        </div>
+                        <div class="row justify-content-around">
+                          <div class="col-md-4">
+                            <mat-form-field appearance="fill">
+                              <mat-label>State</mat-label>
+                              <input matInput id="state" name="state"  placeholder="State">
+                            </mat-form-field>
+                          </div>
+                          <div class="col-md-4">
+                            <mat-form-field appearance="fill">
+                              <mat-label>Zipcode</mat-label>
+                              <input matInput id="zipcode" name="zipcode"  placeholder="Zipcode">
+                            </mat-form-field>
+                          </div>
+                        </div>
+                      </div>
+
+                     <!-- For Email  -->
+                     <div *ngIf="ite.name=='Email'" cdkDrag>
+                      <div class="row justify-content-around">
+                        <h1 style="    margin-left: 116px; margin-top: 10px;">Email :-</h1>
+                        <div class="col-md-4">
+                          <mat-form-field appearance="fill">
+                            <mat-label>Email</mat-label>
+                            <input matInput id="email" name="email"  placeholder="Rpc1234@gmail.com">
+                          </mat-form-field>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- For Password  -->
+                    <div *ngIf="ite.name=='Password'" cdkDrag>
+                      <div class="row justify-content-around">
+                        <h1 style="    margin-left: 116px; margin-top: 10px;">Password :-</h1>
+                        <div class="col-md-4">
+                          <mat-form-field appearance="fill">
+                            <mat-label>Enter your password</mat-label>
+                            <input matInput [type]="hide ? 'password' : 'text'">
+                            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                              <mat-icon svgIcon="{{hide ? 'visibility_off' : 'visibility'}}"></mat-icon>
+                            </button>
+                          </mat-form-field>
+                        </div>
+                      </div>
+                    </div>
+
+
+                    <span *ngIf="ite.name=='Label'" cdkDrag>
+                        <label>Label</label>
+                    </span>
+                    <mat-form-field *ngIf="ite.name=='TextField'" appearance="fill" cdkDrag>
+                      <input matInput type="text" placeholder="TextField" >
+                    </mat-form-field>
+                    <!-- <input *ngIf="ite.name=='Button'" type="button" mat-raised-button color="primary" value="Button"> -->
+                    <div class="row justify-content-around">
+                      <div class="col-md-4" style="text-align: center;">
+                        <button *ngIf="ite.name=='Button'" mat-raised-button color="primary">Submit</button>
+                      </div>
+                    </div>
+                    
+                    
                 </div>
+                </form>
               </div>
+            </div>
+          </div>
+          <div class="row justify-content-around " style="    margin-top: -20px; margin-bottom: 10px;">
+            <div class="col-md-4 " style="text-align: center;">
+              <button mat-raised-button color="primary" (click)="onSubmit()">Save</button>
+            </div>
+            
+          </div>
         </div>
     </div>
 </div>
+
+<app-form-make-table [data]="Observable$"></app-form-make-table>

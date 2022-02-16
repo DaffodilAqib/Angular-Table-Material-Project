@@ -16,7 +16,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UpdateDailogComponent } from '../orders/Update-Delete-Component/update-dailog/update-dailog.component';
 import { DeleteDailogComponent } from '../orders/Update-Delete-Component/delete-dailog/delete-dailog.component';
 import { NotPageFoundComponent } from '../not-page-found/not-page-found.component';
-
+import {MatIconModule} from '@angular/material/icon';
+import { FormMakeTableComponent } from '../form-builder/form-make-table/form-make-table.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,10 @@ import { NotPageFoundComponent } from '../not-page-found/not-page-found.componen
     ReactiveFormsModule,
     MatNativeDateModule,
     MaterialExampleModule,
+    MatIconModule
+  ],
+  exports:[
+    MaterialExampleModule
   ]
 })
 export class SideNavModule { }

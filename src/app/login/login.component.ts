@@ -4,6 +4,9 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthServiceService } from '../auth-service.service';
 import {environment} from '../../environments/environment';
+import { MatIconRegistry } from "@angular/material/icon";
+import {MatIconModule} from '@angular/material/icon';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
