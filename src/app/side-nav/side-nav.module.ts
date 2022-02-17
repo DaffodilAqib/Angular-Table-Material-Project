@@ -18,6 +18,10 @@ import { DeleteDailogComponent } from '../orders/Update-Delete-Component/delete-
 import { NotPageFoundComponent } from '../not-page-found/not-page-found.component';
 import {MatIconModule} from '@angular/material/icon';
 import { FormMakeTableComponent } from '../form-builder/form-make-table/form-make-table.component';
+import { FormBuilderComponent } from '../form-builder/form-builder.component';
+import { FormNameComponent } from '../form-builder/form-name/form-name.component';
+import { FormMakerComponent } from '../form-builder/form-maker/form-maker.component';
+
 
 @NgModule({
   declarations: [
@@ -28,7 +32,11 @@ import { FormMakeTableComponent } from '../form-builder/form-make-table/form-mak
     DashboardComponent,
     UpdateDailogComponent,
     DeleteDailogComponent,
-    NotPageFoundComponent
+    NotPageFoundComponent,
+    FormBuilderComponent,
+    FormNameComponent,
+    FormMakeTableComponent,
+    FormMakerComponent
   ],
   imports: [
     CommonModule,

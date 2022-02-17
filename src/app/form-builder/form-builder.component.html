@@ -1,6 +1,6 @@
 <div class="container mt-5">
     <div class="row" style="border: 1px dotted black;">
-        <div class="col-md-4" style="border-right: 1px dotted black;">
+        <div class="col-md-4" style="border-right: 2px dotted lightseagreen; box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);">
             <div class="example-container">
                 <h2>Tools</h2>
                 <div
@@ -147,12 +147,10 @@
           </div>
           <div class="row justify-content-around " style="    margin-top: -20px; margin-bottom: 10px;">
             <div class="col-md-4 " style="text-align: center;">
-              <button mat-raised-button color="primary" (click)="onSubmit()">Save</button>
+              <a routerLink="/FormBuilder" [queryParams]="{ value: 'no' }"><button mat-raised-button color="primary" (click)="onSubmit()">Save</button></a>
             </div>
             
           </div>
         </div>
     </div>
 </div>
-
-<app-form-make-table [data]="Observable$"></app-form-make-table>

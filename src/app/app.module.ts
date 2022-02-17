@@ -21,10 +21,7 @@ import { SignUpComponent } from './sign-up/sign-up.component';
 
 import { AuthInterceptor } from './auth.Interceptor';
 import { SideNavModule } from './side-nav/side-nav.module';
-import { FormBuilderComponent } from './form-builder/form-builder.component';
-import {MatIconModule} from '@angular/material/icon';
-import { FormNameComponent } from './form-builder/form-name/form-name.component';
-import { FormMakeTableComponent } from './form-builder/form-make-table/form-make-table.component';
+
 
 
 
@@ -36,9 +33,7 @@ import { FormMakeTableComponent } from './form-builder/form-make-table/form-make
     SideNavComponent,
     LoginComponent,
     SignUpComponent,
-    FormBuilderComponent,
-    FormNameComponent,
-    FormMakeTableComponent
+    
     // OrdersComponent,
     // EmployeeDetailsComponent,
     // OrderFormComponent,

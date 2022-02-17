@@ -1,42 +1,70 @@
-import { Component, OnInit, Input, AfterViewInit } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Component, OnInit, Input, AfterViewInit, OnDestroy } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { MatIconRegistry } from '@angular/material/icon';
+import { MatTableDataSource } from '@angular/material/table';
+import { DomSanitizer } from '@angular/platform-browser';
+import { Subject, Subscription } from 'rxjs';
+import { FormDataService } from '../form-data.service';
 
 @Component({
   selector: 'app-form-make-table',
   templateUrl: './form-make-table.component.html',
   styleUrls: ['./form-make-table.component.css']
 })
-export class FormMakeTableComponent implements OnInit, AfterViewInit {
+export class FormMakeTableComponent implements OnInit, AfterViewInit, OnDestroy {
 
-  @Input() data = new Subject();
-
-
-  dataSource: any;
-  displayedColumns=["FormName","FormId","Fields","Action"];
-  displayedColumn=["FormName","FormId","Fields"];
-  constructor() { }
+  formMakerData: any;
+  formSave: any;
+  subscription = new Subscription();
+  displayedColumns = ["FormName", "FormId", "Fields", "Action"];
+  displayedColumn = ["FormName", "FormId"];
+  constructor(
+    public matIconRegistry: MatIconRegistry,
+    private domSanitizer: DomSanitizer,
+    public dialog: MatDialog,
+    public formData: FormDataService
+  ) { }
 
   ngOnInit(): void {
+
+    this.matIconRegistry.addSvgIcon(
+      "visibility",
+      this.domSanitizer.bypassSecurityTrustResourceUrl("../assets/images/eye-solid.svg")
+    );
+
     let dataS: any = [];
     // let pre_data: any = {}
-    this.data.subscribe((res:any)=>{
-      console.log("From Form Making Table Component :-",res);
-      // {Name:"",FormId:"",Fields:""}
-      // pre_data["FormName"]= res.formName;
-      // pre_data["FormId"]=res.id
-      let data_fields = ""
-      for(let i=0;i<res.fields.length;i++){
-        data_fields += " "+res.fields[i].name;
-      }
-      // pre_data["Fields"]=data_fields;
-      // this.dataS.push(pre_data);
-      dataS.push({"FormName":res.formName, "FormId":res.id,"Fields":data_fields})
-      this.dataSource = Array.from(dataS);
-      console.log("Data Source:-",this.dataSource);
-    })
+    // this.subscription.add(this.formData.Data$
+    //   .subscribe(res => {
+    //     console.log("From Service :-", res);
+    //     dataS.push(res);
+    //     this.formSave = Array.from(dataS);
+    //     console.log("DataSource:-", this.formSave);
+    //   }));
+    // this.subscription = this.formData.Data$
+    //   .subscribe(res => {
+    //     console.log("From Service :-", res);
+    //     dataS.push(res);
+    //     this.formSave = Array.from(dataS);
+    //     console.log("DataSource:-", this.formSave);
+    //   });
+    this.formSave = this.formData.getData();
+    console.log("Make Table Data",this.formSave);
+
+
   }
   ngAfterViewInit(): void {
-    
+
+  }
+  ngOnDestroy(): void {
+    console.log("on Destroy");
+      this.formData.Data$.unsubscribe();
+  }
+
+  OpenFormMake(data: any) {
+    console.log(data);
+    this.formMakerData = data;
+
   }
 
 }

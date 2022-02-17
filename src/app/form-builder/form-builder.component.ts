@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Observable,fromEvent, Subject } from 'rxjs';
+import { FormDataService } from './form-data.service';
 import { FormNameComponent } from './form-name/form-name.component';
 
 @Component({
@@ -21,7 +22,7 @@ export class FormBuilderComponent implements OnInit {
   json_data: any = {}
   formName = "Enter Form Name";
   formId="";
-  Observable$ = new Subject();
+
   // vis_form_name = true;
   
   // @ViewChild('FormName') FormName:ElementRef | any
@@ -29,7 +30,8 @@ export class FormBuilderComponent implements OnInit {
   constructor(
     public matIconRegistry: MatIconRegistry,
     private domSanitizer: DomSanitizer,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    public formData: FormDataService
   ) { }
 
   changeFormName(){
@@ -67,31 +69,32 @@ export class FormBuilderComponent implements OnInit {
 
   onSubmit(){
     console.log("model:-",this.data);
-    this.json_data["formName"] = this.formName;
-    this.json_data["id"] = Math.random().toString(36).substr(2, 9); 
-    this.json_data["fields"] = [];
+    this.json_data["FormName"] = this.formName;
+    this.json_data["FormId"] = Math.random().toString(36).substr(2, 9); 
+    this.json_data["Fields"] = [];
     for(let i=0;i<this.formTools.length;i++ ){
       // console.log(this.formTools[i]);
       if(this.formTools[i].name=="name"){
-        this.json_data.fields.push({"name":"firstName", "label": "First Name", "value": "", "type": "text", "validators":{}});
-        this.json_data.fields.push({"name":"lastName", "label": "Last Name", "value": "", "type": "text", "validators":{}})
+        this.json_data.Fields.push({"name":"firstName", "label": "First Name", "value": "", "type": "text", "validators":{}});
+        this.json_data.Fields.push({"name":"lastName", "label": "Last Name", "value": "", "type": "text", "validators":{}})
       }
       else if(this.formTools[i].name=="Address"){
-        this.json_data.fields.push({"name":"street", "label": "Street", "value": "", "type": "text", "validators":{}});
-        this.json_data.fields.push({"name":"city", "label": "City", "value": "", "type": "text", "validators":{}});
-        this.json_data.fields.push({"name":"state", "label": "State", "value": "", "type": "text", "validators":{}});
-        this.json_data.fields.push({"name":"zipcode", "label": "Zipcode", "value": "", "type": "number", "validators":{}});
+        this.json_data.Fields.push({"name":"street", "label": "Street", "value": "", "type": "text", "validators":{}});
+        this.json_data.Fields.push({"name":"city", "label": "City", "value": "", "type": "text", "validators":{}});
+        this.json_data.Fields.push({"name":"state", "label": "State", "value": "", "type": "text", "validators":{}});
+        this.json_data.Fields.push({"name":"zipcode", "label": "Zipcode", "value": "", "type": "number", "validators":{}});
       }
       else if(this.formTools[i].name=="Email"){
-        this.json_data.fields.push({"name":"email", "label": "Email", "value": "", "type": "email", "validators":{}})
+        this.json_data.Fields.push({"name":"email", "label": "Email", "value": "", "type": "email", "validators":{}})
       }
       else if(this.formTools[i].name=="Password"){
-        this.json_data.fields.push({"name":"password", "label": "Password", "value": "", "type": "password", "validators":{}})
+        this.json_data.Fields.push({"name":"password", "label": "Password", "value": "", "type": "password", "validators":{}})
       }
 
     }
     console.log("Final json :-",this.json_data);
-    this.Observable$.next(this.json_data);
+    // this.formData.Data$.next(this.json_data);
+    this.formData.saveData(this.json_data);
   }
 
   onDeleteForm(){
