@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatIconRegistry } from '@angular/material/icon';
 import { MatTableDataSource } from '@angular/material/table';
 import { DomSanitizer } from '@angular/platform-browser';
+import { Router } from '@angular/router';
 import { Subject, Subscription } from 'rxjs';
 import { FormDataService } from '../form-data.service';
 
@@ -22,7 +23,8 @@ export class FormMakeTableComponent implements OnInit, AfterViewInit, OnDestroy 
     public matIconRegistry: MatIconRegistry,
     private domSanitizer: DomSanitizer,
     public dialog: MatDialog,
-    public formData: FormDataService
+    public formData: FormDataService,
+    public router: Router
   ) { }
 
   ngOnInit(): void {
@@ -57,13 +59,14 @@ export class FormMakeTableComponent implements OnInit, AfterViewInit, OnDestroy 
 
   }
   ngOnDestroy(): void {
-    console.log("on Destroy");
-      this.formData.Data$.unsubscribe();
   }
 
   OpenFormMake(data: any) {
     console.log(data);
-    this.formMakerData = data;
+    // this.formMakerData = JSON.stringify(data);
+    this.router.navigate(['/form-maker'], { queryParams: { value:'no'}, state: { json:data}});
+    // this.router.navigateByUrl('/form-maker', ,{ state: { json:this.formMakerData} });
+    // this.formData.Data$.next(data);
 
   }
 
