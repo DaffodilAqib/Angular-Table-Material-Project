@@ -9,12 +9,14 @@
                 </div>
                 
                 <div *ngIf="onSign" >
+
                     <div class="login_icon">
                         <img src="../../assets/images/user.png" alt="" width="100" height="100">
                     </div>
                     <div class="alert alert-danger m-auto" *ngIf="error">
                         {{error}}
                     </div>
+                    
                     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
                         <label for="UserName">UserName</label><br>
                         <input type="text" id="UserName" (click)="onChanges()" #username name="UserName" formControlName="UserName" required>

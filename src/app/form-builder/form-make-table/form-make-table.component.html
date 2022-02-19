@@ -1,0 +1,58 @@
+<br>
+<div class="container m-auto">
+    <div class="row justify-content-around" >
+        <div class="offset-md-3 col-md-4 pt-2" style="text-align: center;">
+            <h2>Save Form</h2>
+        </div>
+        <div class="col-md-3">
+          <a routerLink="/form-builder" [queryParams]="{ value: 'no' }"><button mat-raised-button color="accent">Creat New Form</button></a>
+        </div>
+    </div>
+    <div class="row">
+        <table mat-table [dataSource]="formSave" class="mat-elevation-z8">
+              
+             <!-- userId Column   -->
+            <ng-container *ngFor="let col of displayedColumn">
+    
+                <ng-container  matColumnDef='{{col}}'>
+                  
+                    <th mat-header-cell *matHeaderCellDef> {{col}}</th>
+                    <td mat-cell *matCellDef="let element"> {{element[col]}} </td>
+                  </ng-container>
+            </ng-container>
+
+            
+    
+                <ng-container  matColumnDef='Fields'>
+                  
+                    <th mat-header-cell *matHeaderCellDef>Fields</th>
+                    
+                    <div mat-cell *matCellDef="let element" style="margin-top: 14px;">
+                        
+                        <td mat-cell *ngFor="let ite of element.Fields">{{ite.name}}&nbsp; </td>
+                        
+                    </div>
+                    
+                </ng-container>
+            
+
+            <!-- Action Column  -->
+            <ng-container matColumnDef="Action">
+                <th mat-header-cell *matHeaderCellDef> Action  </th>
+                <td mat-cell *matCellDef="let element">
+                    <a (click)="OpenFormMake(element)">
+                        <button mat-icon-button color="primary"  aria-label="Example icon button with a home icon">
+                            <mat-icon svgIcon="visibility"></mat-icon>
+                        </button>
+                    </a> 
+                </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+       </table>
+    </div>
+    
+
+</div> 
+<div class="m-5"></div>
+<!-- <app-form-maker *ngIf="formMakerData" [Json_data]="formMakerData"></app-form-maker> -->

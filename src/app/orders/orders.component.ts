@@ -141,23 +141,24 @@ export class OrdersComponent implements OnInit {
       })
     });
   }
-  setTableData(){
+  setTableData() {
     let data: any = [];
     this.orderData.getData()
-    .subscribe((res:any)=>{
-      res.documents.forEach((element:any) => {
-        data.push({"FirstName":element['fields']['firstname']['stringValue'],
-        "LastName":element['fields']['lastname']['stringValue'],
-        "PhoneNumber":element['fields']['phonenumber']['stringValue'],
-        "Email":element['fields']['email']['stringValue'],
-        "Product":element['fields']['productname']['stringValue'],
-        "ProductId":element['fields']['productid']['stringValue'],
-        "Price":element['fields']['price']['integerValue'],
-        "Action":element.name
-      });
-      });
-      this.dataSource = data;
-    })
+      .subscribe((res: any) => {
+        res.documents.forEach((element: any) => {
+          data.push({
+            "FirstName": element['fields']['firstname']['stringValue'],
+            "LastName": element['fields']['lastname']['stringValue'],
+            "PhoneNumber": element['fields']['phonenumber']['stringValue'],
+            "Email": element['fields']['email']['stringValue'],
+            "Product": element['fields']['productname']['stringValue'],
+            "ProductId": element['fields']['productid']['stringValue'],
+            "Price": element['fields']['price']['integerValue'],
+            "Action": element.name
+          });
+        });
+        this.dataSource = data;
+      })
   }
 
 }

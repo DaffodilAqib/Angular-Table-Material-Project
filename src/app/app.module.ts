@@ -33,6 +33,7 @@ import { SideNavModule } from './side-nav/side-nav.module';
     SideNavComponent,
     LoginComponent,
     SignUpComponent,
+    
     // OrdersComponent,
     // EmployeeDetailsComponent,
     // OrderFormComponent,
@@ -54,7 +55,8 @@ import { SideNavModule } from './side-nav/side-nav.module';
     SideNavModule,
   ],
   exports: [
-    MatSidenavModule
+    MatSidenavModule,
+    MaterialExampleModule
   ],
   providers: [AuthGuardGuard,{
     provide: HTTP_INTERCEPTORS,
