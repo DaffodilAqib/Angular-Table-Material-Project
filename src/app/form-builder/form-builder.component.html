@@ -10,27 +10,40 @@
 
 
             <span *ngIf="item.name=='TextField'">
-              <mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
+              <mat-tree [dataSource]="dataSource" [treeControl]="treeControl" class="example-tree">
                 <!-- This is the tree node template for leaf nodes -->
-                <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding>
-                  <!-- use a disabled button to provide padding for tree leaf -->
-                  <button mat-icon-button disabled></button>
-                  {{node.name}}
-                </mat-tree-node>
+                <!-- There is inline padding applied to this node using styles.
+                  This padding value depends on the mat-icon-button width. -->
+                <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group"
+                  [(ngModel)]="item.type">
+                  <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle>
+                    <mat-radio-button (click)="onratio(node)" class="example-radio-button" [value]="node.name">
+                      {{node.name}} 
+                    </mat-radio-button>
+                  </mat-tree-node>
+                </mat-radio-group>
+
                 <!-- This is the tree node template for expandable nodes -->
-                <mat-tree-node *matTreeNodeDef="let node;when: hasChild" matTreeNodePadding>
-                  <button mat-icon-button matTreeNodeToggle
-                          [attr.aria-label]="'Toggle ' + node.name">
-                    <mat-icon class="mat-icon-rtl-mirror">
-                      {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
-                    </mat-icon>
-                  </button>
-                  {{node.name}}
-                </mat-tree-node>
+                <mat-nested-tree-node *matTreeNodeDef="let node; when: hasChild">
+                  <div class="mat-tree-node">
+                    <button mat-icon-button matTreeNodeToggle [attr.aria-label]="'Toggle ' + node.name">
+                      <mat-icon class="mat-icon-rtl-mirror"
+                        svgIcon="{{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}">
+                      </mat-icon>
+                    </button>
+                    {{node.name}}
+                  </div>
+                  <!-- There is inline padding applied to this div using styles.
+                        This padding value depends on the mat-icon-button width.  -->
+                  <div [class.example-tree-invisible]="!treeControl.isExpanded(node)" role="group">
+                    <ng-container matTreeNodeOutlet></ng-container>
+                  </div>
+                </mat-nested-tree-node>
               </mat-tree>
-              
+
+
             </span>
-            <span *ngIf="item.name!='TextField'">{{item.name}}</span>
+            <div class="example-box" *ngIf="item.name!='TextField'" example-box>{{item.name}}</div>
           </div>
         </div>
       </div>
@@ -62,12 +75,12 @@
             <form autocomplete="off">
               <div *ngFor="let ite of formTools; index as i;">
 
-                <div *ngIf="ite.name=='Label'"  cdkDrag>
+                <div *ngIf="ite.name=='Label'" cdkDrag>
                   <div class="row">
                     <div class="col-md-3" style=" margin-top: 10px;">
                       <mat-form-field *ngIf="!ite.visibility" appearance="fill">
                         <mat-label>Enter Label Title</mat-label>
-                        <input matInput placeholder="Value"  #labelValue>
+                        <input matInput placeholder="Value" #labelValue>
                         <button mat-icon-button matSuffix (click)="editLabel(i,numLabel,labelValue.value)">
                           <mat-icon svgIcon="check" style="color: #183052;"></mat-icon>
                         </button>
@@ -75,8 +88,9 @@
                           <mat-icon svgIcon="clear" style="color: #183052;"></mat-icon>
                         </button>
                       </mat-form-field>
-                      <label *ngIf="ite.visibility" (click)="ite.visibility=!ite.visibility" style="font-size: 25px; margin-left: 25px;" >{{ite.fields.labelname?ite.fields.labelname:'Label'+ite.number}}</label>
-                    </div>           
+                      <label *ngIf="ite.visibility" (click)="ite.visibility=!ite.visibility"
+                        style="font-size: 25px; margin-left: 25px;">{{ite.fields.labelname?ite.fields.labelname:'Label'+ite.number}}</label>
+                    </div>
                   </div>
                 </div>
 
@@ -163,7 +177,7 @@
                 </div>
 
                 <mat-form-field *ngIf="ite.name=='TextField'" appearance="fill" cdkDrag>
-                  <input matInput type="text" placeholder="TextField">
+                  <input matInput type="{{ite.type}}" placeholder="TextField">
                 </mat-form-field>
                 <!-- <input *ngIf="ite.name=='Button'" type="button" mat-raised-button color="primary" value="Button"> -->
                 <div class="row justify-content-around">

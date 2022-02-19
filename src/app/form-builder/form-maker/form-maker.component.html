@@ -12,7 +12,7 @@
                         <mat-form-field appearance="fill">
                             <mat-label>Enter {{field.name}}</mat-label>
                         <input matInput [type]="field.subtype=='password'?(hide ? 'password' : 'text'):field.subtype" formControlName="{{field.name}}"  placeholder="value" >                
-                        <button *ngIf="field.type=='password'" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                        <button *ngIf="field.subtype=='password'" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
                             <mat-icon svgIcon="{{hide ? 'visibility_off' : 'visibility'}}"></mat-icon>
                           </button>
                         

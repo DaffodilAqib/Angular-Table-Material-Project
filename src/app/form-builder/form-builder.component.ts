@@ -8,6 +8,18 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { Observable, fromEvent, Subject } from 'rxjs';
 import { FormDataService } from './form-data.service';
 import { FormNameComponent } from './form-name/form-name.component';
+import {MatTreeNestedDataSource} from '@angular/material/tree';
+import {NestedTreeControl} from '@angular/cdk/tree';
+
+const TREE_DATA: any = [
+  {
+    name: "TextField",
+    children: [{ name: "text" },
+    { name: "number" },
+    { name: "email" },
+    { name: "password" }]
+  }
+];
 
 @Component({
   selector: 'app-form-builder',
@@ -19,14 +31,11 @@ export class FormBuilderComponent implements OnInit {
   //tools = ["Label","AreaField","Radio button","Check box","Button"];
   numLabel = 1;
   numTextField = 1;
-  TREE_DATA = [{
-    name: "TextField",
-    children: [{ name: "text" },
-    { name: "number" },
-    { name: "email" },
-    { name: "password" }]
-  }]
-  tools = [{ name: "TextField", number: 1 }, { name: "Label", number: 1, visibility: true, fields: { labelname: "" } }, { name: "Button", input_type: "button" }, { name: "name" }, { name: "Address" }, { name: "Email" }, { name: "Password" }];
+
+  treeControl = new NestedTreeControl<any>(node => node.children);
+  dataSource = new MatTreeNestedDataSource<any>();
+ 
+  tools = [{ name: "TextField", number: 1, type:"text" }, { name: "Label", number: 1, visibility: true, fields: { labelname: "" } }, { name: "Button", input_type: "button" }, { name: "name" }, { name: "Address" }, { name: "Email" }, { name: "Password" }];
   formTools: any = [];
   hide = true;
   data: object = [];
@@ -34,28 +43,18 @@ export class FormBuilderComponent implements OnInit {
   formName = "Enter Form Name";
   formId = "";
 
+  onratio(data: any){
+    this.treeControl.collapseAll();
+    console.log("ON ratio working");
+    console.log("Node:-",data);
+  }
+  
 
-  private _transformer = (node: any, level: number) => {
-    return {
-      expandable: !!node.children && node.children.length > 0,
-      name: node.name,
-      level: level,
-    };
-  };
+  
 
-  treeControl = new FlatTreeControl<any>(
-    node => node.level,
-    node => node.expandable,
-  );
+  
 
-  treeFlattener = new MatTreeFlattener(
-    this._transformer,
-    node => node.level,
-    node => node.expandable,
-    node => node.children,
-  );
-
-  dataSource = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
+  
 
 
 
@@ -69,12 +68,10 @@ export class FormBuilderComponent implements OnInit {
     public dialog: MatDialog,
     public formData: FormDataService
   ) {
-    this.dataSource.data = this.TREE_DATA;
+    this.dataSource.data = TREE_DATA;
   }
 
-  hasChild = (a: number, node: any) =>{ 
-    return !!node.children && node.children.length > 0;
-  }
+  hasChild = (_: number, node: any) => !!node.children && node.children.length > 0;
 
   changeFormName() {
     // this.vis_form_name = false;
@@ -111,6 +108,16 @@ export class FormBuilderComponent implements OnInit {
     this.matIconRegistry.addSvgIcon(
       "clear",
       this.domSanitizer.bypassSecurityTrustResourceUrl("../assets/images/circle-xmark-solid.svg")
+    );
+
+    this.matIconRegistry.addSvgIcon(
+      "chevron_right",
+      this.domSanitizer.bypassSecurityTrustResourceUrl("../assets/images/chevron-right-solid.svg")
+    );
+
+    this.matIconRegistry.addSvgIcon(
+      "expand_more",
+      this.domSanitizer.bypassSecurityTrustResourceUrl("../assets/images/caret-down-solid.svg")
     );
 
 
@@ -154,6 +161,9 @@ export class FormBuilderComponent implements OnInit {
       else if (this.formTools[i].name == "Label") {
         this.json_data.Fields.push({ "type": "label", "name": this.formTools[i].fields.labelname });
       }
+      else if(this.formTools[i].name=="TextField"){
+        this.json_data.Fields.push({"type":"input", "name": this.formTools[i].type,"label":this.formTools[i].type,"value":"","subtype":this.formTools[i].type,"validators":{} })
+      }
 
     }
     console.log("Final json :-", this.json_data);
@@ -171,6 +181,7 @@ export class FormBuilderComponent implements OnInit {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
       console.log(event);
+      
       if (this.tools[event.previousIndex].name == "Label") {
         this.numLabel += 1;
         // this.data['name'] = {firstname:"",lastname:""};
